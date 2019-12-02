@@ -74,7 +74,12 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        index = self._hash_mod(key)
+        if self.storage[index] is None:
+            print("The key is not there")
+
+        remove = self.storage[index]
+        self.storage[index] = remove.next
 
 
     def retrieve(self, key):
@@ -104,7 +109,10 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+#capacity holds the amount of storage, so by looping through it, 
+#we can append and for it to rehash the table by triggering it again
+        for i in range(self.capacity):
+            self.storage.append(None)
 
 
 
