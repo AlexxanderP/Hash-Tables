@@ -21,5 +21,5 @@ print(djb2(key))
 djb2key = djb2(key)
 
 
-print(f"sha256 key: {sha256key}")
-print(f"djb2 key: {djb2key}")
+print(f"sha256 key: {int(sha256key) % 10}")
+print(f"djb2 key: {djb2key % 10}")
