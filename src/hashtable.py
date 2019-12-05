@@ -12,6 +12,7 @@ class HashTable:
     A hash table that with `capacity` buckets
     that accepts string keys
     '''
+    
     def __init__(self, capacity):
         self.capacity = capacity  # Number of buckets in the hash table
         self.storage = [None] * capacity
@@ -51,7 +52,17 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        index = self._hash_mod(key)
+        # print("This is the index:", index)
+        # print("this is the key:", key)
+
+        new_pair = LinkedPair(key, value)
+        # print(f"key: {key}, ||| value, {value}")
+
+        new_pair.next = self.storage[index]
+
+        self.storage[index] = new_pair
+        # print(f"new Pair: {new_pair}")
 
 
 
@@ -63,7 +74,12 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        index = self._hash_mod(key)
+        if self.storage[index] is None:
+            print("The key is not there")
+
+        remove = self.storage[index]
+        self.storage[index] = remove.next
 
 
     def retrieve(self, key):
@@ -74,7 +90,16 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+
+        index= self._hash_mod(key)
+        current_pair = self.storage[index]
+
+        while current_pair:
+            if current_pair.key == key:
+                return current_pair.value
+            current_pair = current_pair.next
+
+        return None
 
 
     def resize(self):
@@ -84,7 +109,10 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+#capacity holds the amount of storage, so by looping through it, 
+#we can append and for it to rehash the table by triggering it again
+        for i in range(self.capacity):
+            self.storage.append(None)
 
 
 
